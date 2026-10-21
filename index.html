@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="DUCK — Music Production & Interactive Studio">
 <title>DUCK — Produção Musical</title>
-<meta name="description" content="DUCK · Pedro Belentani — Produção musical, beatmaking, mixagem e masterização. R&B, Pop e electrónica com narrativa cyberpunk.">
+<meta name="description" content="DUCK · Sound Lab — Produção musical, beatmaking, mixagem e masterização. R&B, Pop e electrónica com narrativa cyberpunk.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -191,8 +191,8 @@ footer b{color:var(--text2);font-weight:500}
     <div class="stats">
       <div class="stat"><div class="num"><b>36M</b>+</div><div class="lbl" data-i18n="hero.streams">Streams</div></div>
       <div class="stat"><div class="num"><b>40</b>+</div><div class="lbl" data-i18n="hero.releases">Lançamentos</div></div>
-      <div class="stat"><div class="num"><b>12</b></div><div class="lbl" data-i18n="hero.singles">Singles</div></div>
-      <div class="stat"><div class="num"><b>4</b></div><div class="lbl" data-i18n="hero.langs">Idiomas</div></div>
+      <div class="stat"><div class="num"><b>8</b></div><div class="lbl" data-i18n="hero.singles">Ferramentas</div></div>
+      <div class="stat"><div class="num"><b>4</b></div><div class="lbl" data-i18n="hero.langs">Efeitos</div></div>
     </div>
     <div class="cta">
       <a href="#music" class="btn" data-i18n="hero.cta">Ouvir Agora</a>
@@ -215,10 +215,10 @@ footer b{color:var(--text2);font-weight:500}
     <div class="section-title" data-i18n="disc.title">Singles & <em>Lançamentos</em></div>
     <div class="disc-grid" id="discGrid"></div>
     <div class="socials">
-      <a href="https://music.apple.com/artist/belentani" target="_blank" rel="noopener">Apple Music</a>
-      <a href="https://open.spotify.com/artist/belentani" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://www.youtube.com/@belentani" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://soundcloud.com/belentani" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="https://music.apple.com/artist/belentani" target="_blank" rel="noopener">Apple Music · Belentani</a>
+      <a href="https://open.spotify.com/artist/belentani" target="_blank" rel="noopener">Spotify · Belentani</a>
+      <a href="https://www.youtube.com/@belentani" target="_blank" rel="noopener">YouTube · Belentani</a>
+      <a href="https://soundcloud.com/belentani" target="_blank" rel="noopener">SoundCloud · Belentani</a>
     </div>
   </div>
 </section>
@@ -261,23 +261,23 @@ const TRACKS = [
   {t:"I Wrote a Song",y:"2024"},{t:"Caused To Me",y:"2024"},{t:"Lento",y:"2024"}
 ];
 const TOOLS = [
-  {i:"P",h:"Piano Interativo",d:"8 octavas, Web Audio API. Toque com o teclado ou mouse."},
-  {i:"D",h:"Drum Machine",d:"Sequenciador de 16 passos com samples de bateria."},
+  {i:"P",h:"Piano Interativo",d:"Faixas de oitavas com Web Audio API. Toque com o teclado ou mouse."},
+  {i:"D",h:"Drum Machine",d:"Sequenciador de 16 passos com síntese e samples de bateria opcionais."},
   {i:"S",h:"Sintetizador",d:"Vozes sintetizadas com filtros e envelopes."},
-  {i:"V",h:"Voice Synth",d:"Grave sua voz e aplique efeitos em tempo real."},
-  {i:"M",h:"Mixador",d:"6 canais com faders, crossfader e EQ."},
+  {i:"V",h:"Voice Synth",d:"Capture microfone e adicione efeitos ao mix, com monitoração opcional."},
+  {i:"M",h:"Mixador",d:"Seis controles de nível, crossfader bateria/instrumentos e EQ de 2 bandas."},
   {i:"E",h:"Efeitos",d:"Reverb, delay, distortion, chorus."},
   {i:"R",h:"Gravador",d:"Grave e exporte suas produções."},
   {i:"4",h:"432Hz",d:"Frequência 432Hz escondida. Encontre-a."}
 ];
 const ABOUT = [
-  {h:"Produção Musical",d:"R&B, Pop, Electrónica com narrativa cyberpunk. Produção caseira profissional com Audacity, stems separados e múltiplas tomadas vocais."},
-  {h:"Estética",d:"Neo-futurista / Cyberpunk / Glassmorphism — “living machine”. A estética visual é tão importante quanto o som."},
-  {h:"Idiomas",d:"4 idiomas nativos: Português, Español, English, Français. Cada single disponível em múltiplas versões fonéticas."},
-  {h:"Tecnologia",d:"HTML5, CSS3, Web Audio API. Código puro, sem frameworks pesados."}
+  {h:"Produção Musical",d:"DUCK, produtor de Aracaju (SE), trabalha com pop, trap, MPB e hip-hop. A intenção do artista orienta a arquitetura sonora de cada projeto."},
+  {h:"Estética",d:"Direção sonora e identidade de produtor: ritmo, timbre, arranjos e assinatura musical por obra."},
+  {h:"Colaborações",d:"Obras listadas fazem parte do repertório criativo apresentado no site; os créditos de cada lançamento devem ser consultados na distribuição."},
+  {h:"Tecnologia",d:"DUCK Studio usa Web Audio API, bateria de 16 passos, samples, sintetizador, EQ, efeitos e gravação local."}
 ];
 const CONTACTS = [
-  {h:"Email",u:"mailto:belentani7pedro@gmail.com"},
+  {h:"Contato do projeto · Belentani",u:"mailto:belentani7pedro@gmail.com"},
   {h:"Instagram",u:"https://www.instagram.com/belentani_"},
   {h:"LinkedIn",u:"https://www.linkedin.com/in/pedro-b-09473598"},
   {h:"GitHub",u:"https://github.com/belentani7pedro"}
@@ -288,33 +288,33 @@ const I18N = {
   pt: {
     "nav.open":"Abrir estúdio ↗","tools.open":"Abrir ferramentas ↗","nav.music":"Música","nav.studio":"Estúdio","nav.about":"Sobre","nav.contact":"Contacto",
     "hero.badge":"Novo single · 2026","hero.subtitle":"Produção Musical · Beatmaker · Mixagem · Masterização",
-    "hero.streams":"Streams","hero.releases":"Lançamentos","hero.singles":"Singles","hero.langs":"Idiomas",
+    "hero.streams":"Streams","hero.releases":"Lançamentos","hero.singles":"Ferramentas","hero.langs":"Efeitos",
     "hero.cta":"Ouvir Agora","hero.cta2":"Estúdio",
-    "disc.label":"Discografia","disc.title":"Singles & Lançamentos",
+    "disc.label":"Portfólio musical","disc.title":"Projetos e repertório",
     "tools.label":"Ferramentas","tools.title":"Estúdio de Produção",
-    "about.label":"Sobre","about.title":"O Artista",
+    "about.label":"Sobre","about.title":"O Produtor",
     "contact.label":"Contacto","contact.title":"Fale Comigo",
     "footer.tag":"Produzido com Web Audio API"
   },
   es: {
     "nav.open":"Abrir estudio ↗","tools.open":"Abrir herramientas ↗","nav.music":"Música","nav.studio":"Estudio","nav.about":"Sobre","nav.contact":"Contacto",
     "hero.badge":"Nuevo single · 2026","hero.subtitle":"Producción Musical · Beatmaker · Mezcla · Masterización",
-    "hero.streams":"Streams","hero.releases":"Lanzamientos","hero.singles":"Singles","hero.langs":"Idiomas",
+    "hero.streams":"Streams","hero.releases":"Lanzamientos","hero.singles":"Herramientas","hero.langs":"Efectos",
     "hero.cta":"Escuchar Ahora","hero.cta2":"Estudio",
-    "disc.label":"Discografía","disc.title":"Singles y Lanzamientos",
+    "disc.label":"Portafolio musical","disc.title":"Proyectos y repertorio",
     "tools.label":"Herramientas","tools.title":"Estudio de Producción",
-    "about.label":"Sobre","about.title":"El Artista",
+    "about.label":"Sobre","about.title":"El Productor",
     "contact.label":"Contacto","contact.title":"Háblame",
     "footer.tag":"Producido con Web Audio API"
   },
   en: {
     "nav.open":"Open studio ↗","tools.open":"Open tools ↗","nav.music":"Music","nav.studio":"Studio","nav.about":"About","nav.contact":"Contact",
     "hero.badge":"New single · 2026","hero.subtitle":"Music Production · Beatmaker · Mixing · Mastering",
-    "hero.streams":"Streams","hero.releases":"Releases","hero.singles":"Singles","hero.langs":"Languages",
+    "hero.streams":"Streams","hero.releases":"Releases","hero.singles":"Tools","hero.langs":"Effects",
     "hero.cta":"Listen Now","hero.cta2":"Studio",
-    "disc.label":"Discography","disc.title":"Singles & Releases",
+    "disc.label":"Music portfolio","disc.title":"Projects & repertoire",
     "tools.label":"Tools","tools.title":"Production Studio",
-    "about.label":"About","about.title":"The Artist",
+    "about.label":"About","about.title":"The Producer",
     "contact.label":"Contact","contact.title":"Get In Touch",
     "footer.tag":"Built with Web Audio API"
   }
