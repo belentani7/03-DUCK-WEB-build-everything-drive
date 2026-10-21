@@ -36,5 +36,5 @@ test("preserves all original sections and links to working studio",()=>{
 });
 test("linked workstation anchors resolve",()=>{
   const ids=new Set([...studio.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
-  for(const [,anchor] of home.matchAll(/href="studio\.html#([^"]+)"/g))assert.ok(ids.has(anchor),"broken studio anchor: "+anchor);
+  for(const [,anchor] of home.matchAll(/href="studio\.html#([^"]+)"/g)){if(anchor.includes("${"))continue;assert.ok(ids.has(anchor),"broken studio anchor: "+anchor)}
 });
