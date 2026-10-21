@@ -4,16 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#06100b">
-<meta name="description" content="DUCK — produção musical, identidade sonora e um estúdio interativo com bateria, sintetizador, piano, efeitos e gravação diretamente no navegador.">
+
 <meta property="og:type" content="website">
-<meta property="og:title" content="DUCK — Music Production & Interactive Studio">
-<title>DUCK — Produção Musical</title>
-<meta name="description" content="DUCK · Sound Lab — Produção musical, beatmaking, mixagem e masterização. R&B, Pop e electrónica com narrativa cyberpunk.">
+<meta property="og:title" content="DUCK Sound Lab · Design archive">
+<title>DUCK Sound Lab — Estudo de Interface / Arquivo</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="DUCK Sound Lab — variante de design preservada para uso interno. O produto canónico está no repositório principal DUCK Studio; não é uma discografia oficial.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Release: preserve all existing sections while making every studio tool usable */
+/* Interface study preserved for review; no official discography or duplicated SEO */
 a:focus-visible,button:focus-visible{outline:2px solid #dfffaa;outline-offset:3px}
 .tool-card{display:block;text-decoration:none;color:inherit}
 .tool-card:focus-visible{border-color:var(--accent)}
@@ -37,6 +38,8 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%}
 button{font-family:inherit}
 
+.scope-note{max-width:750px;color:var(--text2);font-size:.78rem;line-height:1.65;margin-top:1rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 /* Grain overlay */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -189,8 +192,8 @@ footer b{color:var(--text2);font-weight:500}
     <h1>DUCK</h1>
     <div class="subtitle" data-i18n="hero.subtitle">Produção Musical · Beatmaker · Mixagem · Masterização</div>
     <div class="stats">
-      <div class="stat"><div class="num"><b>36M</b>+</div><div class="lbl" data-i18n="hero.streams">Streams</div></div>
-      <div class="stat"><div class="num"><b>40</b>+</div><div class="lbl" data-i18n="hero.releases">Lançamentos</div></div>
+      <div class="stat"><div class="num"><b>16</b></div><div class="lbl" data-i18n="hero.streams">Passos</div></div>
+      <div class="stat"><div class="num"><b>6</b></div><div class="lbl" data-i18n="hero.releases">Lançamentos</div></div>
       <div class="stat"><div class="num"><b>8</b></div><div class="lbl" data-i18n="hero.singles">Ferramentas</div></div>
       <div class="stat"><div class="num"><b>4</b></div><div class="lbl" data-i18n="hero.langs">Efeitos</div></div>
     </div>
@@ -211,14 +214,12 @@ footer b{color:var(--text2);font-weight:500}
 
 <section id="music">
   <div class="section-inner">
-    <div class="section-label" data-i18n="disc.label">Discografia</div>
-    <div class="section-title" data-i18n="disc.title">Singles & <em>Lançamentos</em></div>
+    <div class="section-label" data-i18n="disc.label">Processos</div>
+    <div class="section-title" data-i18n="disc.title">Arquitetura <em>sonora</em></div>
     <div class="disc-grid" id="discGrid"></div>
     <div class="socials">
-      <a href="https://music.apple.com/artist/belentani" target="_blank" rel="noopener">Apple Music · Belentani</a>
-      <a href="https://open.spotify.com/artist/belentani" target="_blank" rel="noopener">Spotify · Belentani</a>
-      <a href="https://www.youtube.com/@belentani" target="_blank" rel="noopener">YouTube · Belentani</a>
-      <a href="https://soundcloud.com/belentani" target="_blank" rel="noopener">SoundCloud · Belentani</a>
+      <a href="https://github.com/belentani7" target="_blank" rel="noopener noreferrer">Origem do projeto · GitHub Belentani ↗</a>
+      <p class="scope-note">Esta variante não apresenta catálogo fonográfico. Os lançamentos do produtor DUCK só serão publicados após confirmação de créditos e links oficiais.</p>
     </div>
   </div>
 </section>
@@ -235,30 +236,31 @@ footer b{color:var(--text2);font-weight:500}
 <section id="about">
   <div class="section-inner">
     <div class="section-label" data-i18n="about.label">Sobre</div>
-    <div class="section-title" data-i18n="about.title">O <em>Artista</em></div>
+    <div class="section-title" data-i18n="about.title">O <em>Produtor</em></div>
     <div class="about-grid" id="aboutGrid"></div>
   </div>
 </section>
 
 <section id="contact" style="background:var(--bg2)">
   <div class="section-inner">
-    <div class="section-label" data-i18n="contact.label">Contacto</div>
-    <div class="section-title" data-i18n="contact.title">Fale <em>Comigo</em></div>
+    <div class="section-label" data-i18n="contact.label">Informações</div>
+    <div class="section-title" data-i18n="contact.title">Sobre o <em>projeto</em></div>
     <div class="contact-links" id="contactLinks"></div>
   </div>
 </section>
 
 <footer>
   <div><b>DUCK</b> · Sound Lab © 2026 · <span data-i18n="footer.tag">Produzido com Web Audio API</span></div>
+  <p class="scope-note">Variante não indexável do projeto DUCK. Não representa uma segunda discografia nem envia pedidos de produção.</p>
 </footer>
 
 <script>
 // ─── Datos ───────────────────────────────────────────────────────────────────
 const TRACKS = [
-  {t:"Judas",y:"2026"},{t:"Mon Amour",y:"May 2026"},{t:"Sleep Talking",y:"5K+ plays"},
-  {t:"Heart Breaking",y:"2025"},{t:"Therapist",y:"2025"},{t:"Sozinho",y:"2025"},
-  {t:"ANTI-LOVE",y:"2025"},{t:"Apaga a Luz",y:"2025"},{t:"America Has A Problem",y:"2024"},
-  {t:"I Wrote a Song",y:"2024"},{t:"Caused To Me",y:"2024"},{t:"Lento",y:"2024"}
+  {t:"Direção criativa",y:"Briefing · referências · intenção artística"},
+  {t:"Beat & arranjo",y:"Ritmo · harmonia · estrutura"},
+  {t:"Mixagem",y:"Timbre · dinâmica · espaço"},
+  {t:"Masterização",y:"Coerência de reprodução · finalização"}
 ];
 const TOOLS = [
   {i:"P",h:"Piano Interativo",d:"Faixas de oitavas com Web Audio API. Toque com o teclado ou mouse."},
@@ -273,14 +275,11 @@ const TOOLS = [
 const ABOUT = [
   {h:"Produção Musical",d:"DUCK, produtor de Aracaju (SE), trabalha com pop, trap, MPB e hip-hop. A intenção do artista orienta a arquitetura sonora de cada projeto."},
   {h:"Estética",d:"Direção sonora e identidade de produtor: ritmo, timbre, arranjos e assinatura musical por obra."},
-  {h:"Colaborações",d:"Obras listadas fazem parte do repertório criativo apresentado no site; os créditos de cada lançamento devem ser consultados na distribuição."},
+  {h:"Colaborações",d:"Nesta variante, apenas processos e capacidades são demonstrados. Os créditos e lançamentos de DUCK necessitam confirmação independente."},
   {h:"Tecnologia",d:"DUCK Studio usa Web Audio API, bateria de 16 passos, samples, sintetizador, EQ, efeitos e gravação local."}
 ];
 const CONTACTS = [
-  {h:"Contato do projeto · Belentani",u:"mailto:belentani7pedro@gmail.com"},
-  {h:"Instagram",u:"https://www.instagram.com/belentani_"},
-  {h:"LinkedIn",u:"https://www.linkedin.com/in/pedro-b-09473598"},
-  {h:"GitHub",u:"https://github.com/belentani7pedro"}
+  {h:"Identidade do projeto · Belentani GitHub",u:"https://github.com/belentani7"}
 ];
 
 // ─── i18n ────────────────────────────────────────────────────────────────────
@@ -288,7 +287,7 @@ const I18N = {
   pt: {
     "nav.open":"Abrir estúdio ↗","tools.open":"Abrir ferramentas ↗","nav.music":"Música","nav.studio":"Estúdio","nav.about":"Sobre","nav.contact":"Contacto",
     "hero.badge":"Novo single · 2026","hero.subtitle":"Produção Musical · Beatmaker · Mixagem · Masterização",
-    "hero.streams":"Streams","hero.releases":"Lançamentos","hero.singles":"Ferramentas","hero.langs":"Efeitos",
+    "hero.streams":"Steps","hero.releases":"Canais","hero.singles":"Ferramentas","hero.langs":"Efeitos",
     "hero.cta":"Ouvir Agora","hero.cta2":"Estúdio",
     "disc.label":"Portfólio musical","disc.title":"Projetos e repertório",
     "tools.label":"Ferramentas","tools.title":"Estúdio de Produção",
@@ -299,7 +298,7 @@ const I18N = {
   es: {
     "nav.open":"Abrir estudio ↗","tools.open":"Abrir herramientas ↗","nav.music":"Música","nav.studio":"Estudio","nav.about":"Sobre","nav.contact":"Contacto",
     "hero.badge":"Nuevo single · 2026","hero.subtitle":"Producción Musical · Beatmaker · Mezcla · Masterización",
-    "hero.streams":"Streams","hero.releases":"Lanzamientos","hero.singles":"Herramientas","hero.langs":"Efectos",
+    "hero.streams":"Steps","hero.releases":"Canales","hero.singles":"Herramientas","hero.langs":"Efectos",
     "hero.cta":"Escuchar Ahora","hero.cta2":"Estudio",
     "disc.label":"Portafolio musical","disc.title":"Proyectos y repertorio",
     "tools.label":"Herramientas","tools.title":"Estudio de Producción",
@@ -310,9 +309,9 @@ const I18N = {
   en: {
     "nav.open":"Open studio ↗","tools.open":"Open tools ↗","nav.music":"Music","nav.studio":"Studio","nav.about":"About","nav.contact":"Contact",
     "hero.badge":"New single · 2026","hero.subtitle":"Music Production · Beatmaker · Mixing · Mastering",
-    "hero.streams":"Streams","hero.releases":"Releases","hero.singles":"Tools","hero.langs":"Effects",
+    "hero.streams":"Steps","hero.releases":"Mix channels","hero.singles":"Tools","hero.langs":"Effects",
     "hero.cta":"Listen Now","hero.cta2":"Studio",
-    "disc.label":"Music portfolio","disc.title":"Projects & repertoire",
+    "disc.label":"Production process","disc.title":"Production approach",
     "tools.label":"Tools","tools.title":"Production Studio",
     "about.label":"About","about.title":"The Producer",
     "contact.label":"Contact","contact.title":"Get In Touch",
