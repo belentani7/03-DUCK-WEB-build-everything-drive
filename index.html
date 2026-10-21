@@ -3,12 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#06100b">
+<meta name="description" content="DUCK — produção musical, identidade sonora e um estúdio interativo com bateria, sintetizador, piano, efeitos e gravação diretamente no navegador.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DUCK — Music Production & Interactive Studio">
 <title>DUCK — Produção Musical</title>
 <meta name="description" content="DUCK · Pedro Belentani — Produção musical, beatmaking, mixagem e masterização. R&B, Pop e electrónica com narrativa cyberpunk.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* Release: preserve all existing sections while making every studio tool usable */
+a:focus-visible,button:focus-visible{outline:2px solid #dfffaa;outline-offset:3px}
+.tool-card{display:block;text-decoration:none;color:inherit}
+.tool-card:focus-visible{border-color:var(--accent)}
+.studio-entry{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.4rem}
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#030806;--bg2:#07110a;--bg3:#0a1a0e;
@@ -161,6 +171,7 @@ footer b{color:var(--text2);font-weight:500}
   <div class="nav-links" id="navLinks">
     <a href="#music" data-i18n="nav.music">Música</a>
     <a href="#studio" data-i18n="nav.studio">Estúdio</a>
+    <a href="studio.html" data-i18n="nav.open">Abrir estúdio ↗</a>
     <a href="#about" data-i18n="nav.about">Sobre</a>
     <a href="#contact" data-i18n="nav.contact">Contacto</a>
     <div class="lang-switch">
@@ -185,7 +196,7 @@ footer b{color:var(--text2);font-weight:500}
     </div>
     <div class="cta">
       <a href="#music" class="btn" data-i18n="hero.cta">Ouvir Agora</a>
-      <a href="#studio" class="btn ghost" data-i18n="hero.cta2">Estúdio</a>
+      <a href="studio.html" class="btn ghost" data-i18n="hero.cta2">Estúdio interativo ↗</a>
     </div>
   </div>
   <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -217,6 +228,7 @@ footer b{color:var(--text2);font-weight:500}
     <div class="section-label" data-i18n="tools.label">Ferramentas</div>
     <div class="section-title" data-i18n="tools.title">Estúdio de <em>Produção</em></div>
     <div class="tools-grid" id="toolsGrid"></div>
+    <a href="studio.html" class="btn studio-entry" data-i18n="tools.open">Abrir ferramentas ↗</a>
   </div>
 </section>
 
@@ -237,7 +249,7 @@ footer b{color:var(--text2);font-weight:500}
 </section>
 
 <footer>
-  <div><b>DUCK</b> · Pedro Belentani © 2026 · <span data-i18n="footer.tag">Produzido com Web Audio API</span></div>
+  <div><b>DUCK</b> · Sound Lab © 2026 · <span data-i18n="footer.tag">Produzido com Web Audio API</span></div>
 </footer>
 
 <script>
@@ -274,7 +286,7 @@ const CONTACTS = [
 // ─── i18n ────────────────────────────────────────────────────────────────────
 const I18N = {
   pt: {
-    "nav.music":"Música","nav.studio":"Estúdio","nav.about":"Sobre","nav.contact":"Contacto",
+    "nav.open":"Abrir estúdio ↗","tools.open":"Abrir ferramentas ↗","nav.music":"Música","nav.studio":"Estúdio","nav.about":"Sobre","nav.contact":"Contacto",
     "hero.badge":"Novo single · 2026","hero.subtitle":"Produção Musical · Beatmaker · Mixagem · Masterização",
     "hero.streams":"Streams","hero.releases":"Lançamentos","hero.singles":"Singles","hero.langs":"Idiomas",
     "hero.cta":"Ouvir Agora","hero.cta2":"Estúdio",
@@ -285,7 +297,7 @@ const I18N = {
     "footer.tag":"Produzido com Web Audio API"
   },
   es: {
-    "nav.music":"Música","nav.studio":"Estudio","nav.about":"Sobre","nav.contact":"Contacto",
+    "nav.open":"Abrir estudio ↗","tools.open":"Abrir herramientas ↗","nav.music":"Música","nav.studio":"Estudio","nav.about":"Sobre","nav.contact":"Contacto",
     "hero.badge":"Nuevo single · 2026","hero.subtitle":"Producción Musical · Beatmaker · Mezcla · Masterización",
     "hero.streams":"Streams","hero.releases":"Lanzamientos","hero.singles":"Singles","hero.langs":"Idiomas",
     "hero.cta":"Escuchar Ahora","hero.cta2":"Estudio",
@@ -296,7 +308,7 @@ const I18N = {
     "footer.tag":"Producido con Web Audio API"
   },
   en: {
-    "nav.music":"Music","nav.studio":"Studio","nav.about":"About","nav.contact":"Contact",
+    "nav.open":"Open studio ↗","tools.open":"Open tools ↗","nav.music":"Music","nav.studio":"Studio","nav.about":"About","nav.contact":"Contact",
     "hero.badge":"New single · 2026","hero.subtitle":"Music Production · Beatmaker · Mixing · Mastering",
     "hero.streams":"Streams","hero.releases":"Releases","hero.singles":"Singles","hero.langs":"Languages",
     "hero.cta":"Listen Now","hero.cta2":"Studio",
@@ -321,9 +333,9 @@ const render = () => {
       <div class="title">${t.t}</div><div class="year">${t.y}</div>
     </div>`).join('');
   $('toolsGrid').innerHTML = TOOLS.map((t,i) =>
-    `<div class="tool-card reveal" style="transition-delay:${(i%4)*70}ms">
+    `<a class="tool-card reveal" href="studio.html#${["pianoTitle","drumsTitle","synthTitle","sampleTitle","mixerTitle","fxTitle","record","frequencyLabel"][i]}" style="transition-delay:${(i%4)*70}ms">
       <div class="ico">${t.i}</div><h3>${t.h}</h3><p>${t.d}</p>
-    </div>`).join('');
+    </a>`).join('');
   $('aboutGrid').innerHTML = ABOUT.map(a =>
     `<div class="about-card reveal"><h3>${a.h}</h3><p>${a.d}</p></div>`).join('');
   $('contactLinks').innerHTML = CONTACTS.map(c =>
