@@ -38,3 +38,14 @@ test("linked workstation anchors resolve",()=>{
   const ids=new Set([...studio.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]));
   for(const [,anchor] of home.matchAll(/href="studio\.html#([^"]+)"/g)){if(anchor.includes("${"))continue;assert.ok(ids.has(anchor),"broken studio anchor: "+anchor)}
 });
+
+test("non-canonical DUCK design archive cannot impersonate artist discography",()=>{
+  assert.match(home,/name="robots" content="noindex,nofollow,noarchive"/);
+  assert.match(studio,/name="robots" content="noindex,nofollow,noarchive"/);
+  assert.equal([...home.matchAll(/name="description"/g)].length,1);
+  assert.doesNotMatch(home,/Judas|Mon Amour|Sleep Talking|Apaga a Luz/);
+  assert.doesNotMatch(home,/spotify\.com\/artist\/belentani|mailto:belentani7pedro@gmail\.com/);
+  assert.match(home,/const TRACKS = \[/);
+  assert.match(home,/Arquitetura sonora/);
+  assert.match(home,/Variante não indexável do projeto DUCK/);
+});
