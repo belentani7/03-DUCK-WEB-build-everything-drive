@@ -49,3 +49,13 @@ test("non-canonical DUCK design archive cannot impersonate artist discography",(
   assert.match(home,/Arquitetura sonora/);
   assert.match(home,/Variante não indexável do projeto DUCK/);
 });
+
+test("archive catalog and accessible navigation are truthful",()=>{
+  assert.doesNotMatch(home,/Novo single · 2026|Nuevo single · 2026|New single · 2026/);
+  assert.match(home,/const CATALOG_TRANSLATIONS = \{/);
+  assert.match(home,/Dirección creativa/);
+  assert.match(home,/Creative direction/);
+  assert.match(home,/render\(lang\)/);
+  assert.match(home,/aria-expanded="false" aria-controls="navLinks"/);
+  assert.match(home,/e\.key==='Escape'/);
+});
