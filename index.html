@@ -170,7 +170,7 @@ footer b{color:var(--text2);font-weight:500}
 
 <nav>
   <div class="nav-logo"><span>DUCK</span></div>
-  <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">☰</button>
   <div class="nav-links" id="navLinks">
     <a href="#music" data-i18n="nav.music">Música</a>
     <a href="#studio" data-i18n="nav.studio">Estúdio</a>
@@ -188,7 +188,7 @@ footer b{color:var(--text2);font-weight:500}
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge"><span class="dot"></span><span data-i18n="hero.badge">Novo single · 2026</span></div>
+    <div class="hero-badge"><span class="dot"></span><span data-i18n="hero.badge">Arquivo visual · Laboratório local</span></div>
     <h1>DUCK</h1>
     <div class="subtitle" data-i18n="hero.subtitle">Produção Musical · Beatmaker · Mixagem · Masterização</div>
     <div class="stats">
@@ -198,7 +198,7 @@ footer b{color:var(--text2);font-weight:500}
       <div class="stat"><div class="num"><b>4</b></div><div class="lbl" data-i18n="hero.langs">Efeitos</div></div>
     </div>
     <div class="cta">
-      <a href="#music" class="btn" data-i18n="hero.cta">Ouvir Agora</a>
+      <a href="#music" class="btn" data-i18n="hero.cta">Explorar processos</a>
       <a href="studio.html" class="btn ghost" data-i18n="hero.cta2">Estúdio interativo ↗</a>
     </div>
   </div>
@@ -207,8 +207,8 @@ footer b{color:var(--text2);font-weight:500}
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track" id="marqueeTrack">
-    <span><b>JUDAS</b> · <b>MON AMOUR</b> · <b>SLEEP TALKING</b> · <b>HEART BREAKING</b> · <b>THERAPIST</b> · <b>SOZINHO</b> · <b>ANTI-LOVE</b> · <b>APAGA A LUZ</b></span>
-    <span><b>JUDAS</b> · <b>MON AMOUR</b> · <b>SLEEP TALKING</b> · <b>HEART BREAKING</b> · <b>THERAPIST</b> · <b>SOZINHO</b> · <b>ANTI-LOVE</b> · <b>APAGA A LUZ</b></span>
+    <span><b>IDEIA</b> · <b>ARRANJO</b> · <b>GRAVAÇÃO</b> · <b>MIXAGEM</b> · <b>MASTERIZAÇÃO</b> · <b>ENTREGA</b></span>
+    <span><b>IDEIA</b> · <b>ARRANJO</b> · <b>GRAVAÇÃO</b> · <b>MIXAGEM</b> · <b>MASTERIZAÇÃO</b> · <b>ENTREGA</b></span>
   </div>
 </div>
 
@@ -286,10 +286,10 @@ const CONTACTS = [
 const I18N = {
   pt: {
     "nav.open":"Abrir estúdio ↗","tools.open":"Abrir ferramentas ↗","nav.music":"Música","nav.studio":"Estúdio","nav.about":"Sobre","nav.contact":"Contacto",
-    "hero.badge":"Novo single · 2026","hero.subtitle":"Produção Musical · Beatmaker · Mixagem · Masterização",
+    "hero.badge":"Arquivo visual · Laboratório local","hero.subtitle":"Produção Musical · Beatmaker · Mixagem · Masterização",
     "hero.streams":"Steps","hero.releases":"Canais","hero.singles":"Ferramentas","hero.langs":"Efeitos",
-    "hero.cta":"Ouvir Agora","hero.cta2":"Estúdio",
-    "disc.label":"Portfólio musical","disc.title":"Projetos e repertório",
+    "hero.cta":"Explorar processos","hero.cta2":"Estúdio",
+    "disc.label":"Processos","disc.title":"Arquitetura sonora",
     "tools.label":"Ferramentas","tools.title":"Estúdio de Produção",
     "about.label":"Sobre","about.title":"O Produtor",
     "contact.label":"Contacto","contact.title":"Fale Comigo",
@@ -297,10 +297,10 @@ const I18N = {
   },
   es: {
     "nav.open":"Abrir estudio ↗","tools.open":"Abrir herramientas ↗","nav.music":"Música","nav.studio":"Estudio","nav.about":"Sobre","nav.contact":"Contacto",
-    "hero.badge":"Nuevo single · 2026","hero.subtitle":"Producción Musical · Beatmaker · Mezcla · Masterización",
+    "hero.badge":"Archivo visual · Laboratorio local","hero.subtitle":"Producción Musical · Beatmaker · Mezcla · Masterización",
     "hero.streams":"Steps","hero.releases":"Canales","hero.singles":"Herramientas","hero.langs":"Efectos",
-    "hero.cta":"Escuchar Ahora","hero.cta2":"Estudio",
-    "disc.label":"Portafolio musical","disc.title":"Proyectos y repertorio",
+    "hero.cta":"Explorar procesos","hero.cta2":"Estudio",
+    "disc.label":"Procesos","disc.title":"Arquitectura sonora",
     "tools.label":"Herramientas","tools.title":"Estudio de Producción",
     "about.label":"Sobre","about.title":"El Productor",
     "contact.label":"Contacto","contact.title":"Háblame",
@@ -308,14 +308,66 @@ const I18N = {
   },
   en: {
     "nav.open":"Open studio ↗","tools.open":"Open tools ↗","nav.music":"Music","nav.studio":"Studio","nav.about":"About","nav.contact":"Contact",
-    "hero.badge":"New single · 2026","hero.subtitle":"Music Production · Beatmaker · Mixing · Mastering",
+    "hero.badge":"Design archive · Local lab","hero.subtitle":"Music Production · Beatmaker · Mixing · Mastering",
     "hero.streams":"Steps","hero.releases":"Mix channels","hero.singles":"Tools","hero.langs":"Effects",
-    "hero.cta":"Listen Now","hero.cta2":"Studio",
-    "disc.label":"Production process","disc.title":"Production approach",
+    "hero.cta":"Explore process","hero.cta2":"Studio",
+    "disc.label":"Process","disc.title":"Sound architecture",
     "tools.label":"Tools","tools.title":"Production Studio",
     "about.label":"About","about.title":"The Producer",
     "contact.label":"Contact","contact.title":"Get In Touch",
     "footer.tag":"Built with Web Audio API"
+  }
+};
+
+// The design archive has no verified discography; only production process cards.
+const CATALOG_TRANSLATIONS = {
+  es: {
+    tracks: [
+      {t:"Dirección creativa",y:"Briefing · referencias · intención artística"},
+      {t:"Beat y arreglo",y:"Ritmo · armonía · estructura"},
+      {t:"Mezcla",y:"Timbre · dinámica · espacio"},
+      {t:"Masterización",y:"Coherencia de reproducción · acabado"}
+    ],
+    tools: [
+      {h:"Piano interactivo",d:"Teclado de dos octavas con Web Audio API."},
+      {h:"Caja de ritmos",d:"Secuenciador de 16 pasos y samples opcionales."},
+      {h:"Sintetizador",d:"Osciladores, filtros y envolventes."},
+      {h:"Sintetizador de voz",d:"Micrófono opcional con monitorización."},
+      {h:"Mezclador",d:"Seis canales, crossfader y ecualizador."},
+      {h:"Efectos",d:"Reverb, delay, distorsión y chorus."},
+      {h:"Grabador",d:"Graba y exporta tu sesión localmente."},
+      {h:"432 Hz",d:"Afinación alternativa experimental, sin afirmaciones médicas."}
+    ],
+    about: [
+      {h:"Producción musical",d:"DUCK es un productor de Aracaju (SE) que trabaja con pop, trap, MPB y hip-hop."},
+      {h:"Estética",d:"El ritmo, los arreglos y el timbre acompañan la intención de cada obra."},
+      {h:"Colaboraciones",d:"Esta variante solo muestra procesos; los créditos requieren verificación independiente."},
+      {h:"Tecnología",d:"Herramientas locales de audio, secuenciación, efectos y grabación en el navegador."}
+    ]
+  },
+  en: {
+    tracks: [
+      {t:"Creative direction",y:"Brief · references · artistic intent"},
+      {t:"Beat and arrangement",y:"Rhythm · harmony · structure"},
+      {t:"Mixing",y:"Timbre · dynamics · space"},
+      {t:"Mastering",y:"Playback consistency · finishing"}
+    ],
+    tools: [
+      {h:"Interactive piano",d:"Two-octave keyboard using the Web Audio API."},
+      {h:"Drum machine",d:"16-step sequencer with optional samples."},
+      {h:"Synthesizer",d:"Oscillators, filters and envelopes."},
+      {h:"Voice synthesizer",d:"Opt-in microphone with optional monitoring."},
+      {h:"Mixer",d:"Six channels, crossfader and equalizer."},
+      {h:"Effects",d:"Reverb, delay, distortion and chorus."},
+      {h:"Recorder",d:"Record and export your local session."},
+      {h:"432 Hz",d:"Experimental tuning, without health claims."}
+    ],
+    about: [
+      {h:"Music production",d:"DUCK is a producer from Aracaju (SE), working across pop, trap, MPB and hip-hop."},
+      {h:"Aesthetic",d:"Rhythm, arrangement and timbre serve each work's artistic intent."},
+      {h:"Collaborations",d:"This archive only demonstrates processes; credits require independent verification."},
+      {h:"Technology",d:"Local browser tools for audio, sequencing, effects and recording."}
+    ]
   }
 };
 
@@ -325,17 +377,21 @@ const icon = i => {
   const glyphs = ["♩","♪","♫","♬","♭","♮","♯","𝄞"];
   return `<div class="cover">${glyphs[i % glyphs.length]}</div>`;
 };
-const render = () => {
-  $('discGrid').innerHTML = TRACKS.map((t,i) =>
+const render = (lang = "pt") => {
+  const localized = CATALOG_TRANSLATIONS[lang];
+  const tracks = localized ? localized.tracks : TRACKS;
+  const tools = localized ? TOOLS.map((tool, i) => ({...tool, ...localized.tools[i]})) : TOOLS;
+  const about = localized ? localized.about : ABOUT;
+  $('discGrid').innerHTML = tracks.map((t,i) =>
     `<div class="disc-card reveal" style="transition-delay:${(i%6)*60}ms">
       <div class="play">▶</div>${icon(i)}
       <div class="title">${t.t}</div><div class="year">${t.y}</div>
     </div>`).join('');
-  $('toolsGrid').innerHTML = TOOLS.map((t,i) =>
+  $('toolsGrid').innerHTML = tools.map((t,i) =>
     `<a class="tool-card reveal" href="studio.html#${["pianoTitle","drumsTitle","synthTitle","sampleTitle","mixerTitle","fxTitle","record","frequencyLabel"][i]}" style="transition-delay:${(i%4)*70}ms">
       <div class="ico">${t.i}</div><h3>${t.h}</h3><p>${t.d}</p>
     </a>`).join('');
-  $('aboutGrid').innerHTML = ABOUT.map(a =>
+  $('aboutGrid').innerHTML = about.map(a =>
     `<div class="about-card reveal"><h3>${a.h}</h3><p>${a.d}</p></div>`).join('');
   $('contactLinks').innerHTML = CONTACTS.map(c =>
     `<a href="${c.u}" target="_blank" rel="noopener">${c.h}</a>`).join('');
@@ -357,14 +413,20 @@ function setLang(lang, btn) {
     const k = el.getAttribute('data-i18n');
     if (I18N[lang] && I18N[lang][k]) el.textContent = I18N[lang][k];
   });
+  render(lang);
 }
 document.querySelectorAll('.lang-switch button').forEach(b =>
   b.addEventListener('click', () => setLang(b.dataset.lang, b)));
 
 // ─── Menú móvil ──────────────────────────────────────────────────────────────
 const ham = $('hamburger'), navLinks = $('navLinks');
-ham.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+function closeMenu(){navLinks.classList.remove('open');ham.setAttribute('aria-expanded','false');}
+ham.addEventListener('click', () => {
+  const open=navLinks.classList.toggle('open');
+  ham.setAttribute('aria-expanded',String(open));
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
 
 // ─── Init ────────────────────────────────────────────────────────────────────
 render();
