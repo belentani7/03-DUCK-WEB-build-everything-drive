@@ -12,7 +12,8 @@ test("document shell and distinct brand",()=>{
 });
 test("inline scripts are syntactically valid",()=>{
   for(const [name,html] of [["studio",studio],["home",home]]){
-    const parts=[...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];
+    const scriptPattern = new RegExp("<script([^>]*)>([\\s\\S]*?)</script>", "g");
+    const parts=[...html.matchAll(scriptPattern)];
     assert.ok(parts.length,name+" has inline JavaScript");
     for(const [,attrs,source] of parts){if(attrs.includes("application/ld+json"))JSON.parse(source);else new vm.Script(source,{filename:name+".js"});}
   }
