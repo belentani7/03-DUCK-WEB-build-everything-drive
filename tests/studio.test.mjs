@@ -59,3 +59,36 @@ test("archive catalog and accessible navigation are truthful",()=>{
   assert.match(home,/aria-expanded="false" aria-controls="navLinks"/);
   assert.match(home,/e\.key==='Escape'/);
 });
+
+test("switching language changes rendered process, tools and producer cards",()=>{
+  const events={},docEvents={},elements={};
+  function element(){
+    const classes=new Set(),listeners={},attrs={};
+    return {innerHTML:"",textContent:"",dataset:{},listeners,attrs,
+      classList:{add:k=>classes.add(k),remove:k=>classes.delete(k),contains:k=>classes.has(k),
+        toggle:k=>{if(classes.has(k)){classes.delete(k);return false}classes.add(k);return true}},
+      addEventListener:(k,fn)=>listeners[k]=fn,setAttribute:(k,v)=>attrs[k]=v,
+      getAttribute:k=>attrs[k],querySelectorAll:()=>[]};
+  }
+  for(const id of ["discGrid","toolsGrid","aboutGrid","contactLinks","hamburger","navLinks"])elements[id]=element();
+  const buttons=["pt","es","en"].map(lang=>{const b=element();b.dataset.lang=lang;return b});
+  const badge=element();badge.attrs["data-i18n"]="hero.badge";
+  const document={documentElement:{lang:"pt"},getElementById:id=>elements[id],
+    querySelectorAll:s=>s===".lang-switch button"?buttons:s==="[data-i18n]"?[badge]:[],
+    addEventListener:(k,fn)=>docEvents[k]=fn};
+  const sandbox={document,IntersectionObserver:class{observe(){}unobserve(){}}};
+  vm.createContext(sandbox);
+  vm.runInContext(home.match(/<script>([\\s\\S]*?)<\\/script>/)?.[1]??"",sandbox);
+  assert.match(elements.discGrid.innerHTML,/Direção criativa/);
+  buttons[1].listeners.click();
+  assert.equal(document.documentElement.lang,"es");
+  assert.match(elements.discGrid.innerHTML,/Dirección creativa/);
+  assert.match(elements.toolsGrid.innerHTML,/Caja de ritmos/);
+  buttons[2].listeners.click();
+  assert.match(elements.discGrid.innerHTML,/Creative direction/);
+  assert.match(elements.aboutGrid.innerHTML,/Music production/);
+  elements.hamburger.listeners.click();
+  assert.equal(elements.hamburger.attrs["aria-expanded"],"true");
+  docEvents.keydown({key:"Escape"});
+  assert.equal(elements.hamburger.attrs["aria-expanded"],"false");
+});
