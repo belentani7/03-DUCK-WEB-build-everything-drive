@@ -53,6 +53,7 @@ test("non-canonical DUCK design archive cannot impersonate artist discography",(
 
 test("archive catalog and accessible navigation are truthful",()=>{
   assert.doesNotMatch(home,/Novo single · 2026|Nuevo single · 2026|New single · 2026/);
+  assert.doesNotMatch(home,/data-i18n="hero\\.releases">Lançamentos/);
   assert.match(home,/const CATALOG_TRANSLATIONS = \{/);
   assert.match(home,/Dirección creativa/);
   assert.match(home,/Creative direction/);
