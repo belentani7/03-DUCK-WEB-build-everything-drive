@@ -78,7 +78,7 @@ test("switching language changes rendered process, tools and producer cards",()=
     addEventListener:(k,fn)=>docEvents[k]=fn};
   const sandbox={document,IntersectionObserver:class{observe(){}unobserve(){}}};
   vm.createContext(sandbox);
-  vm.runInContext(home.match(/<script>([\\s\\S]*?)<\\/script>/)?.[1]??"",sandbox);
+  vm.runInContext(home.match(/<script>([\s\S]*?)<\/script>/)?.[1]??"",sandbox);
   assert.match(elements.discGrid.innerHTML,/Direção criativa/);
   buttons[1].listeners.click();
   assert.equal(document.documentElement.lang,"es");
