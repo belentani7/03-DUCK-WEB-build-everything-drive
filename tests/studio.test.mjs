@@ -94,3 +94,54 @@ test("switching language changes rendered process, tools and producer cards",()=
   docEvents.keydown({key:"Escape"});
   assert.equal(elements.hamburger.attrs["aria-expanded"],"false");
 });
+
+function microphoneSandbox({getUserMedia,createMediaStreamSource}){
+  const start=studio.indexOf("function toggleMic(){");
+  const end=studio.indexOf("\n\nrestore();",start);
+  assert.ok(start>=0&&end>start,"mic handler must exist");
+  const context={
+    navigator:{mediaDevices:{getUserMedia}},
+    ctx:{createMediaStreamSource},
+    channels:{mic:{connect(){},disconnect(){}}},
+    nodes:{mix:{}},
+  };
+  vm.createContext(context);
+  vm.runInContext([
+    "let micTogglePromise=null,micStream=null,micSource=null,micLifecycle=0,micPageHidden=false;",
+    "const audio=async()=>{},syncMonitor=()=>{},setStatus=()=>{},$=()=>({textContent:''});",
+    studio.slice(start,end),
+    "globalThis.controls={toggleMic,hide(){micLifecycle++;micPageHidden=true},active(){return !!micStream}};"
+  ].join("\n"),context);
+  return context.controls;
+}
+test("late microphone permission after pagehide stops capture without activating it",async()=>{
+  assert.match(studio,/pagehide",event=>\{micLifecycle\+\+;micPageHidden=true;/);
+  assert.match(studio,/pageshow",event=>\{micPageHidden=false;/);
+  let resolvePermission,signalRequested,stopped=0,created=0;
+  const permission=new Promise(resolve=>{resolvePermission=resolve});
+  const requested=new Promise(resolve=>{signalRequested=resolve});
+  const stream={getTracks:()=>[{stop(){stopped++}}]};
+  const controls=microphoneSandbox({
+    getUserMedia:()=>{signalRequested();return permission},
+    createMediaStreamSource:()=>{created++;return {connect(){},disconnect(){}}}
+  });
+  const pending=controls.toggleMic();
+  await requested;
+  controls.hide();
+  resolvePermission(stream);
+  await pending;
+  assert.equal(stopped,1,"late microphone stream must be stopped");
+  assert.equal(created,0,"must not attach a microphone source after pagehide");
+  assert.equal(controls.active(),false);
+});
+test("microphone source construction failure releases granted tracks",async()=>{
+  let stopped=0;
+  const stream={getTracks:()=>[{stop(){stopped++}}]};
+  const controls=microphoneSandbox({
+    getUserMedia:async()=>stream,
+    createMediaStreamSource:()=>{throw new Error("device disconnected")}
+  });
+  await controls.toggleMic();
+  assert.equal(stopped,1,"failed source must not leave microphone capturing");
+  assert.equal(controls.active(),false);
+});

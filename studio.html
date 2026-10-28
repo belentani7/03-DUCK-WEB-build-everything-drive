@@ -59,6 +59,7 @@ const instruments=["Kick","Snare","Hat","Clap"], defaults=[[0,4,8,12],[4,12],[0,
 let pattern=defaults.map(x=>Array.from({length:16},(_,i)=>x.includes(i)));
 let bpm=108, ctx=null, nodes=null, channels={}, playing=false, stepIndex=0, nextStepAt=0, timer=null, recorder=null, recorderStopping=false, chunks=[], sampleBuffer=null, sampleLoadToken=0, micStream=null, micSource=null, micTogglePromise=null, drumSamples=[null,null,null,null];
 const gainValues={drums:.82,piano:.72,synth:.55,mic:.65,sample:.72,master:.82};
+let micLifecycle=0, micPageHidden=false;
 const setStatus=text=>{$("status").textContent=text};
 function persist(){try{localStorage.setItem("duck-studio-session-v1",JSON.stringify({bpm,pattern}))}catch{}}
 function restore(){try{const x=JSON.parse(localStorage.getItem("duck-studio-session-v1")||"null");if(x&&validatePattern(x.pattern)&&Number.isInteger(x.bpm)&&x.bpm>=60&&x.bpm<=180){pattern=x.pattern;bpm=x.bpm}}catch{}}
@@ -91,7 +92,50 @@ async function record(){try{await audio();if(recorderStopping){setStatus("Finali
 async function loadSample(file){const token=++sampleLoadToken;try{if(!file)return;if(file.size>30*1024*1024)throw new Error("Áudio deve ter até 30 MB");await audio();const decoded=await ctx.decodeAudioData(await file.arrayBuffer());if(token!==sampleLoadToken)return;sampleBuffer=decoded;$("playSample").disabled=false;$("sampleName").textContent=file.name+" · "+Math.round(sampleBuffer.duration)+" s";setStatus("Sample pronto")}catch(e){if(token===sampleLoadToken)setStatus(e.message)}}
 async function playSample(){try{await audio();if(!sampleBuffer)return;const src=ctx.createBufferSource();src.buffer=sampleBuffer;src.connect(channels.sample);src.start();setStatus("Reproduzindo sample")}catch(e){setStatus(e.message)}}
 function syncMonitor(){if(!nodes||!micSource)return;try{micSource.disconnect(nodes.micMonitor)}catch{}if($("monitor").checked)micSource.connect(nodes.micMonitor)}
-function toggleMic(){if(micTogglePromise)return micTogglePromise;micTogglePromise=(async()=>{try{await audio();if(micStream){try{micSource.disconnect()}catch{}try{channels.mic.disconnect(nodes.mix)}catch{}micStream.getTracks().forEach(t=>t.stop());micStream=null;micSource=null;$("mic").textContent="Ativar microfone";setStatus("Microfone desligado");return}if(!navigator.mediaDevices?.getUserMedia)throw new Error("Microfone requer HTTPS ou localhost");const stream=await navigator.mediaDevices.getUserMedia({audio:true});const source=ctx.createMediaStreamSource(stream);micStream=stream;micSource=source;source.connect(channels.mic);channels.mic.connect(nodes.mix);syncMonitor();$("mic").textContent="Desativar microfone";setStatus("Microfone ativo")}catch(e){setStatus("Microfone: "+e.message)}})().finally(()=>{micTogglePromise=null});return micTogglePromise}
+function toggleMic(){
+  if(micTogglePromise)return micTogglePromise;
+  const generation=micLifecycle;
+  micTogglePromise=(async()=>{
+    let pendingStream=null, pendingSource=null;
+    try{
+      await audio();
+      if(micPageHidden||generation!==micLifecycle)return;
+      if(micStream){
+        try{micSource.disconnect()}catch{}
+        try{channels.mic.disconnect(nodes.mix)}catch{}
+        micStream.getTracks().forEach(t=>t.stop());
+        micStream=null;micSource=null;
+        $("mic").textContent="Ativar microfone";
+        setStatus("Microfone desligado");
+        return;
+      }
+      if(!navigator.mediaDevices?.getUserMedia)throw new Error("Microfone requer HTTPS ou localhost");
+      pendingStream=await navigator.mediaDevices.getUserMedia({audio:true});
+      if(micPageHidden||generation!==micLifecycle){
+        pendingStream.getTracks().forEach(t=>t.stop());
+        pendingStream=null;
+        return;
+      }
+      pendingSource=ctx.createMediaStreamSource(pendingStream);
+      pendingSource.connect(channels.mic);
+      channels.mic.connect(nodes.mix);
+      micStream=pendingStream;micSource=pendingSource;
+      syncMonitor();
+      pendingStream=null;pendingSource=null;
+      $("mic").textContent="Desativar microfone";
+      setStatus("Microfone ativo");
+    }catch(e){
+      if(pendingSource)try{pendingSource.disconnect()}catch{}
+      if(pendingStream){
+        pendingStream.getTracks().forEach(t=>t.stop());
+        if(micStream===pendingStream){micStream=null;micSource=null}
+        try{channels.mic.disconnect(nodes.mix)}catch{}
+      }
+      setStatus("Microfone: "+e.message);
+    }
+  })().finally(()=>{micTogglePromise=null});
+  return micTogglePromise;
+}
 
 restore();drawGrid();drawKeys();drawMixer();$("bpm").value=String(bpm);$("bpmOut").textContent=String(bpm);
 $("start").addEventListener("click",start);$("stop").addEventListener("click",stop);$("record").addEventListener("click",record);$("save").addEventListener("click",save);$("load").addEventListener("click",()=>$("patternFile").click());$("patternFile").addEventListener("change",e=>loadFile(e.target.files[0]));$("bpm").addEventListener("input",e=>{bpm=Number(e.target.value);$("bpmOut").textContent=String(bpm);persist()});
@@ -103,7 +147,7 @@ $("crossfader").addEventListener("input",e=>{if(!nodes)return;const cross=(Numbe
 ["eqLow","eqHigh"].forEach(name=>$(name).addEventListener("input",e=>{if(nodes){const value=Number(e.target.value);nodes[name].gain.setTargetAtTime(value,ctx.currentTime,.02);nodes[name==="eqLow"?"speakerEqLow":"speakerEqHigh"].gain.setTargetAtTime(value,ctx.currentTime,.02)}}));
 $("sampleFile").addEventListener("change",e=>loadSample(e.target.files[0]));$("playSample").addEventListener("click",playSample);$("mic").addEventListener("click",toggleMic);$("monitor").addEventListener("change",syncMonitor);
 window.addEventListener("keydown",e=>{if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||["INPUT","SELECT","TEXTAREA","BUTTON"].includes(document.activeElement?.tagName))return;const idx=shortcuts.indexOf(e.key.toLowerCase());if(idx>=0){e.preventDefault();playNote(idx+12)}});
-window.addEventListener("pagehide",event=>{stop();if(micSource)try{micSource.disconnect()}catch{}if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;micSource=null}if(recorder?.state==="recording")try{recorder.stop()}catch{}if(ctx&&!event.persisted){const closing=ctx;ctx=null;nodes=null;channels={};void closing.close()}});window.addEventListener("pageshow",event=>{if(event.persisted)setStatus("Audio listo para reanudar")});
+window.addEventListener("pagehide",event=>{micLifecycle++;micPageHidden=true;stop();if(micSource)try{micSource.disconnect()}catch{}if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;micSource=null}if(recorder?.state==="recording")try{recorder.stop()}catch{}if(ctx&&!event.persisted){const closing=ctx;ctx=null;nodes=null;channels={};void closing.close()}});window.addEventListener("pageshow",event=>{micPageHidden=false;if(event.persisted)setStatus("Audio listo para reanudar")});
 </script>
 </body>
 </html>
